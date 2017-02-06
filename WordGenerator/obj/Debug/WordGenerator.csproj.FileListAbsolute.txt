@@ -1,0 +1,1 @@
+D:\VisualStudio\Projects\WordGenerator\WordGenerator\bin\Debug\WordGenerator.exe.config
