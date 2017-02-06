@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SQLite;
+using WordGenerator.DataSets;
+using WordGenerator.DataSets.WordsTableAdapters;
 
 namespace WordGenerator
 {
@@ -23,6 +26,38 @@ namespace WordGenerator
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        
+
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            DAWords dawords = new DAWords();
+            dawords.InsertWord(txtWord.Text, txtMeaning.Text, txtWord.Text[0].ToString(), 1);
+        }
+
+        private void txtWord_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text != "")
+            {
+                e.Handled = Globals.isValidText(e.Text);
+            }
+            else e.Handled = false;
+        }
+
+        private void txtMeaning_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text != " ")
+            {
+                e.Handled = Globals.isValidText(e.Text);
+            }
+            else e.Handled = false;
         }
     }
 }
