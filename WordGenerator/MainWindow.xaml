@@ -10,15 +10,15 @@
         <StackPanel  Orientation="Vertical">
             <StackPanel Margin="5" HorizontalAlignment="Stretch" Orientation="Horizontal">
                 <Label Name="lblWord" Content="הכנס מילה להוספה"/>
-                <TextBox HorizontalAlignment="Stretch" MinWidth="150" Name="txtWord" PreviewTextInput="txtWord_PreviewTextInput"/>
+                <TextBox InputLanguageManager.InputLanguage="en-US" HorizontalAlignment="Stretch"  MinWidth="150" Name="txtWord" PreviewTextInput="txtWord_PreviewTextInput" GotFocus="txtWord_GotFocus"/>
             </StackPanel>
             <StackPanel Margin="5" HorizontalAlignment="Stretch" Orientation="Horizontal">
                 <Label Name="lblMeanining" Content="הכנס פירוש למילה"/>
-                <TextBox HorizontalAlignment="Stretch" MinWidth="150" Name="txtMeaning" PreviewTextInput="txtMeaning_PreviewTextInput"/>
+                <TextBox HorizontalAlignment="Stretch" InputLanguageManager.InputLanguage="he-IL" MinWidth="150" Name="txtMeaning" PreviewTextInput="txtMeaning_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Margin="5" HorizontalAlignment="Stretch" Orientation="Horizontal">
                 <Label Name="lblDiff" Content="בחר רמת קושי"/>
-                <ComboBox DisplayMemberPath="Difflevel" SelectedValuePath="ID" HorizontalAlignment="Stretch" MinWidth="150" Name="cmbDiff" PreviewTextInput="txtMeaning_PreviewTextInput">
+                <ComboBox DisplayMemberPath="Difflevel" SelectedValuePath="ID" HorizontalAlignment="Stretch" MinWidth="150" Name="cmbDiff" PreviewTextInput="txtMeaning_PreviewTextInput" SelectionChanged="cmbDiff_SelectionChanged">
                     
                 </ComboBox>
             </StackPanel>

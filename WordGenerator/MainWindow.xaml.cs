@@ -16,6 +16,8 @@ using System.Data.SQLite;
 using WordGenerator.DataSets;
 using WordGenerator.DataSets.WordsTableAdapters;
 using System.Data;
+using System.Threading;
+using System.Globalization;
 
 namespace WordGenerator
 {
@@ -28,7 +30,7 @@ namespace WordGenerator
         {
             InitializeComponent();
         }
-
+        DiffLevel diffGlob = new DiffLevel(-6, "");
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             FillCmbData();
@@ -44,8 +46,17 @@ namespace WordGenerator
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            DAWords dawords = new DAWords();
-            dawords.InsertWord(txtWord.Text, txtMeaning.Text, txtWord.Text[0].ToString(), 1);
+            if ((txtWord.Text != "") && (txtMeaning.Text != "") && (cmbDiff.SelectedIndex != 0))
+            {
+                DAWords dawords = new DAWords();
+                dawords.InsertWord(txtWord.Text, txtMeaning.Text, txtWord.Text.ToLower()[0].ToString(), diffGlob.ID);
+                txtMeaning.Clear();
+                txtWord.Clear();
+                txtWord.Focus();
+                cmbDiff.SelectedIndex = 0;
+            }
+            else
+                MessageBox.Show("אחד מהנתונים לא תקין אנא בדוק");
         }
 
         private void txtWord_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -64,6 +75,16 @@ namespace WordGenerator
                 e.Handled = Globals.isValidHebText(e.Text);
             }
             else e.Handled = false;
+        }
+
+        private void cmbDiff_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            diffGlob = (DiffLevel)cmbDiff.SelectedItem;
+        }
+
+        private void txtWord_GotFocus(object sender, RoutedEventArgs e)
+        {
+            InputLanguageManager.Current.CurrentInputLanguage = new CultureInfo("en");
         }
     }
 }
