@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.SQLite;
 using WordGenerator.DataSets;
 using WordGenerator.DataSets.WordsTableAdapters;
+using System.Data;
 
 namespace WordGenerator
 {
@@ -30,9 +31,14 @@ namespace WordGenerator
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           
+            FillCmbData();
         }
 
+        public void FillCmbData()
+        {
+            cmbDiff.ItemsSource =  DiffLevel.GetLstFromDb();
+            cmbDiff.SelectedIndex = 0;
+        }
         
 
 
@@ -46,7 +52,7 @@ namespace WordGenerator
         {
             if (e.Text != "")
             {
-                e.Handled = Globals.isValidText(e.Text);
+                e.Handled = Globals.isValidEnText(e.Text);
             }
             else e.Handled = false;
         }
@@ -55,7 +61,7 @@ namespace WordGenerator
         {
             if (e.Text != " ")
             {
-                e.Handled = Globals.isValidText(e.Text);
+                e.Handled = Globals.isValidHebText(e.Text);
             }
             else e.Handled = false;
         }

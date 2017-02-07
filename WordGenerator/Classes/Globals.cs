@@ -9,10 +9,17 @@ namespace WordGenerator
 {
     class Globals
     {
-        public static bool isValidText(string text)
+        public static bool isValidHebText(string text)
         {
             bool res = false;
-            res = Regex.IsMatch(text, @"^[a-zA-Zא-ת]+$");
+            res = Regex.IsMatch(text, @"^[א-ת]+$");
+            return !res;
+        }
+
+        public static bool isValidEnText(string text)
+        {
+            bool res = false;
+            res = Regex.IsMatch(text, @"^[a-zA-Z]+$");
             return !res;
         }
     }

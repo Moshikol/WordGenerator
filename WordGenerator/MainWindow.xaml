@@ -18,7 +18,9 @@
             </StackPanel>
             <StackPanel Margin="5" HorizontalAlignment="Stretch" Orientation="Horizontal">
                 <Label Name="lblDiff" Content="בחר רמת קושי"/>
-                <ComboBox HorizontalAlignment="Stretch" MinWidth="150" Name="cmbDiff" PreviewTextInput="txtMeaning_PreviewTextInput"/>
+                <ComboBox DisplayMemberPath="Difflevel" SelectedValuePath="ID" HorizontalAlignment="Stretch" MinWidth="150" Name="cmbDiff" PreviewTextInput="txtMeaning_PreviewTextInput">
+                    
+                </ComboBox>
             </StackPanel>
             <Button Name='btnSave' Content='שמור' MaxWidth="150" MinHeight="35" Background="#FFB3FFAE" Click="btnSave_Click"/>
         </StackPanel>
