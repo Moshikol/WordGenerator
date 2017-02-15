@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WordGenerator"
         mc:Ignorable="d"
-        Title="שאלון" Height="300" Width="300"  Background="#FFE4E4E4">
+        Title="שאלון" Height="300" Width="300" FontSize="18"  Background="#FFE4E4E4" Loaded="Window_Loaded">
     <Grid >
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
             <Label Name="lblWord" Content="{Binding Word}"/>
             
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBox Name="txtMeaning" BorderBrush="{Binding IsRight}"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Name="txtMeaning" FlowDirection="RightToLeft" InputLanguageManager.InputLanguage="he-IL"  MinWidth="150" TextChanged="txtMeaning_TextChanged" KeyDown="txtMeaning_KeyDown" />
 
         </StackPanel>
     </Grid>

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WordGenerator;
 using WordGenerator.DataSets.WordsTableAdapters;
 
 namespace WordGenerator
@@ -109,20 +110,26 @@ namespace WordGenerator
                 }
 
             }
-            lstWords = SuffleList(lstWords);
+           // lstWords = SuffleList(lstWords);
+
+            frmQuiz quiz = new frmQuiz(lstWords);
+            Hide();
+            quiz.Show();
+
         }
 
         public List<Word> SuffleList(List<Word> lstW)
         {
             Random rnd = new Random();
-          //  List tempwORD = lstW.OrderBy(item => rnd.Next());
-            
-            foreach (Word w in lstW.OrderBy(item => rnd.Next()))
+            //  List tempwORD = lstW.OrderBy(item => rnd.Next());
+            lstW.OrderBy(item => rnd.Next());
+            foreach (Word w in lstW )
             {
                 lstW.Add(w);
             }
             return lstW;
         }
+
 
 
         #endregion
