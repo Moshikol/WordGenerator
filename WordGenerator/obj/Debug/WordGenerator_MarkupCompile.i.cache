@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\VisualStudio\Projects\WordGenerator\WordGenerator\App.xaml
-21810319998
+3550910831
 
-15-2070648361
+16-1815394576
 77-1439153580
-frmQuiz.xaml;MainWindow.xaml;
+frmMain.xaml;frmQuiz.xaml;MainWindow.xaml;
 
-True
+False
 

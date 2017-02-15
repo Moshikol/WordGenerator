@@ -103,7 +103,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Words.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmMain.xaml.cs">
+      <DependentUpon>frmMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuiz.xaml.cs">
+      <DependentUpon>frmQuiz.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Word.cs" />
+    <Page Include="frmMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmQuiz.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

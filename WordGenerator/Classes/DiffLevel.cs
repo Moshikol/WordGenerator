@@ -13,6 +13,7 @@ namespace WordGenerator
         public int ID { get; set; }
 
         public string Difflevel { get; set; }
+       
 
         public DiffLevel(int id, string difflevel)
         {
@@ -26,7 +27,7 @@ namespace WordGenerator
             List<DiffLevel> Reslst = new List<DiffLevel>();
 
             DADiffLevel daDiff = new DADiffLevel();
-
+           
             DataTable dt;
             dt = daDiff.GetDiffLevelData();
             foreach (DataRow dr in dt.Rows)
@@ -41,5 +42,15 @@ namespace WordGenerator
             return Reslst;
         }
 
+        public static DiffLevel GetDifflvlByID(string id)
+        { DADiffLevel dadiflvl = new DADiffLevel();
+            int temp;
+            int.TryParse(id, out temp);
+            DataTable dt = dadiflvl.GetDiffByID(temp);
+            DiffLevel dfl = new DiffLevel(temp, dt.Rows[0]["diff"].ToString());
+            return dfl;
+
+
+        }
     }
 }

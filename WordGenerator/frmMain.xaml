@@ -1,0 +1,25 @@
+﻿<Window x:Class="WordGenerator.frmMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WordGenerator"
+        mc:Ignorable="d"
+        Title="מילים לפסיכומטרי" Height="350" Background="#FFE4E4E4" Width="525">
+    <Grid FlowDirection="RightToLeft">
+        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Label Name="lblTitle" HorizontalAlignment="Center" VerticalAlignment="Top" MaxHeight="30" Content=" הכנה לפסיכומטרי מילים"></Label>
+            <StackPanel Orientation="Horizontal">
+
+                <StackPanel HorizontalAlignment="Left" Margin="35" VerticalAlignment="Stretch">
+                    <ListBox MinWidth="150" SelectionMode="Multiple" Name="cmbLetters"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" Margin="35" VerticalAlignment="Stretch">
+                    <ListBox MinWidth="150" DisplayMemberPath="Difflevel" SelectedValuePath="ID"  SelectionMode="Multiple" Name="cmbDiffLvl"/>
+                </StackPanel>
+              
+            </StackPanel>
+            <Button Name="btnSaveAndStart" HorizontalAlignment="Center" MinHeight="30" Content="שמור והתחל" VerticalAlignment="Bottom" Click="btnSaveAndStart_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

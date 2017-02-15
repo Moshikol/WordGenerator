@@ -11,5 +11,9 @@
             <Label Name="lblWord" Content="{Binding Word}"/>
             
         </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBox Name="txtMeaning" />
+
+        </StackPanel>
     </Grid>
 </Window>

@@ -1375,7 +1375,7 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[6];
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[7];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT Words.*\r\nFROM     Words";
@@ -1394,29 +1394,22 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
             this._commandCollection[1].Parameters.Add(param);
             this._commandCollection[2] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT id, word, meaning, startingLet, diffID\r\nFROM     Words\r\nWHERE  (startingLe" +
-                "t = @StartingLetter) AND (diffID = @DifflevelID)";
+            this._commandCollection[2].CommandText = "SELECT startingLet, id, word, meaning, diffID\r\nFROM     Words\r\nGROUP BY startingL" +
+                "et\r\nORDER BY startingLet";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT id, word, meaning, startingLet, diffID\r\nFROM     Words\r\nWHERE  (startingLe" +
+                "t = @StartingLetter) AND (diffID = @DifflevelID)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@StartingLetter";
             param.DbType = global::System.Data.DbType.String;
             param.Size = 10;
             param.SourceColumn = "startingLet";
-            this._commandCollection[2].Parameters.Add(param);
+            this._commandCollection[3].Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@DifflevelID";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.Size = 8;
-            param.SourceColumn = "diffID";
-            this._commandCollection[2].Parameters.Add(param);
-            this._commandCollection[3] = new global::System.Data.SQLite.SQLiteCommand();
-            this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "SELECT id, word, meaning, startingLet, diffID\r\nFROM     Words\r\nWHERE  (diffID = @" +
-                "DiffLevel)";
-            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@DiffLevel";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
             param.Size = 8;
@@ -1424,45 +1417,57 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
             this._commandCollection[3].Parameters.Add(param);
             this._commandCollection[4] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = "SELECT id, word, meaning, startingLet, diffID\r\nFROM     Words\r\nWHERE  (startingLe" +
-                "t = @ChoosenLetter)";
+            this._commandCollection[4].CommandText = "SELECT id, word, meaning, startingLet, diffID\r\nFROM     Words\r\nWHERE  (diffID = @" +
+                "DiffLevel)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@DiffLevel";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.Size = 8;
+            param.SourceColumn = "diffID";
+            this._commandCollection[4].Parameters.Add(param);
+            this._commandCollection[5] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = "SELECT id, word, meaning, startingLet, diffID\r\nFROM     Words\r\nWHERE  (startingLe" +
+                "t = @ChoosenLetter)";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@ChoosenLetter";
             param.DbType = global::System.Data.DbType.String;
             param.Size = 10;
             param.SourceColumn = "startingLet";
-            this._commandCollection[4].Parameters.Add(param);
-            this._commandCollection[5] = new global::System.Data.SQLite.SQLiteCommand();
-            this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = "INSERT INTO Words\r\n                  (word, meaning, startingLet, diffID)\r\nVALUES" +
+            this._commandCollection[5].Parameters.Add(param);
+            this._commandCollection[6] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[6].Connection = this.Connection;
+            this._commandCollection[6].CommandText = "INSERT INTO Words\r\n                  (word, meaning, startingLet, diffID)\r\nVALUES" +
                 " (@word, @meaning, @startingLet, @diffID)";
-            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@word";
             param.DbType = global::System.Data.DbType.String;
             param.Size = 2147483647;
             param.SourceColumn = "word";
-            this._commandCollection[5].Parameters.Add(param);
+            this._commandCollection[6].Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@meaning";
             param.DbType = global::System.Data.DbType.String;
             param.Size = 2147483647;
             param.SourceColumn = "meaning";
-            this._commandCollection[5].Parameters.Add(param);
+            this._commandCollection[6].Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@startingLet";
             param.DbType = global::System.Data.DbType.String;
             param.Size = 10;
             param.SourceColumn = "startingLet";
-            this._commandCollection[5].Parameters.Add(param);
+            this._commandCollection[6].Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@diffID";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
             param.Size = 8;
             param.SourceColumn = "diffID";
-            this._commandCollection[5].Parameters.Add(param);
+            this._commandCollection[6].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1480,8 +1485,19 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual Words.WordsDataTable GetWordsByDiffAndLetter(string StartingLetter, long DifflevelID) {
+        public virtual Words.WordsDataTable GetAllLettersLst() {
             this.Adapter.SelectCommand = this.CommandCollection[2];
+            Words.WordsDataTable dataTable = new Words.WordsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual Words.WordsDataTable GetWordsByDiffAndLetter(string StartingLetter, long DifflevelID) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((StartingLetter == null)) {
                 throw new global::System.ArgumentNullException("StartingLetter");
             }
@@ -1499,7 +1515,7 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual Words.WordsDataTable GetWordsByDifflvl(long DiffLevel) {
-            this.Adapter.SelectCommand = this.CommandCollection[3];
+            this.Adapter.SelectCommand = this.CommandCollection[4];
             this.Adapter.SelectCommand.Parameters[0].Value = ((long)(DiffLevel));
             Words.WordsDataTable dataTable = new Words.WordsDataTable();
             this.Adapter.Fill(dataTable);
@@ -1511,7 +1527,7 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual Words.WordsDataTable GetWordsByLetter(string ChoosenLetter) {
-            this.Adapter.SelectCommand = this.CommandCollection[4];
+            this.Adapter.SelectCommand = this.CommandCollection[5];
             if ((ChoosenLetter == null)) {
                 throw new global::System.ArgumentNullException("ChoosenLetter");
             }
@@ -1732,7 +1748,7 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
         public virtual int InsertWord(string word, string meaning, string startingLet, long diffID) {
-            global::System.Data.SQLite.SQLiteCommand command = this.CommandCollection[5];
+            global::System.Data.SQLite.SQLiteCommand command = this.CommandCollection[6];
             if ((word == null)) {
                 throw new global::System.ArgumentNullException("word");
             }
@@ -1986,11 +2002,22 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[2];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT DiffLevel.*\r\nFROM     DiffLevel";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT diff, id\r\nFROM     DiffLevel\r\nWHERE  (id = @ID)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@ID";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.Size = 8;
+            param.SourceColumn = "id";
+            this._commandCollection[1].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1999,6 +2026,18 @@ namespace WordGenerator.DataSets.WordsTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual Words.DiffLevelDataTable GetDiffLevelData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            Words.DiffLevelDataTable dataTable = new Words.DiffLevelDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual Words.DiffLevelDataTable GetDiffByID(long ID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((long)(ID));
             Words.DiffLevelDataTable dataTable = new Words.DiffLevelDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
