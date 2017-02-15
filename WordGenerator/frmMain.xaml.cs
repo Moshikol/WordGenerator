@@ -22,12 +22,40 @@ namespace WordGenerator
     public partial class frmMain : Window
     {
         List<Word> lstWords = new List<Word>();
+        #region Events
         public frmMain()
         {
             InitializeComponent();
             CmbFill();
-            GetWordFromDb();
+           
         }
+
+        private void btnSaveAndStart_Click(object sender, RoutedEventArgs e)
+        {
+            List<DiffLevel> lstSelectedDiffs = new List<DiffLevel>();
+            // lstSelectedDiffs = (List<DiffLevel>)cmbDiffLvl.SelectedItems;
+            foreach (DiffLevel diff in cmbDiffLvl.SelectedItems)
+            {
+                lstSelectedDiffs.Add(diff);
+            }
+
+
+
+            List<string> lstSelectedLetters = new List<string>();
+            // lstSelectedLetters = (List<string>)cmbLetters.SelectedItems;
+            foreach (string str in cmbLetters.SelectedItems)
+            {
+                lstSelectedLetters.Add(str);
+            }
+
+            GetWordsFromDb(lstSelectedLetters, lstSelectedDiffs);
+        }
+
+
+
+        #endregion
+
+        #region Functions
 
         public void CmbFill()
         {
@@ -44,7 +72,7 @@ namespace WordGenerator
             }
 
             cmbLetters.ItemsSource = lstStr;
-           // cmbLetters.SelectedIndex = 0;
+            // cmbLetters.SelectedIndex = 0;
             //*****************Difflvl**************************
 
             List<string> lstDif = new List<string>();
@@ -60,39 +88,36 @@ namespace WordGenerator
 
         }
 
-        public void GetWordFromDb()
+        private void GetWordsFromDb(List<string> lstSelectedLetters, List<DiffLevel> lstSelectedDiffs)
         {
+            lstWords.Clear();
             DAWords dawords = new DAWords();
-            DataTable dtWords = dawords.GetWordsByDiffAndLetter("a", 1);
-            foreach (DataRow dr in dtWords.Rows)
+            foreach (DiffLevel diffLvl in lstSelectedDiffs)
             {
-                int temp;
-                int.TryParse(dr["id"].ToString(), out temp);
-                Word w = new Word(temp, dr["word"].ToString(), DiffLevel.GetDifflvlByID(dr["diffID"].ToString()), dr["meaning"].ToString());
-                lstWords.Add(w);
-            }
 
+                foreach (string lettedr in lstSelectedLetters)
+                {
+
+                     DataTable dtWords = dawords.GetWordsByDiffAndLetter(lettedr, diffLvl.ID);
+                    foreach (DataRow dr in dtWords.Rows)
+                    {
+                        int temp;
+                        int.TryParse(dr["id"].ToString(), out temp);
+                        Word w = new Word(temp, dr["word"].ToString(), DiffLevel.GetDifflvlByID(dr["diffID"].ToString()), dr["meaning"].ToString());
+                        lstWords.Add(w);
+                    }
+                }
+
+            }
         }
 
-        private void btnSaveAndStart_Click(object sender, RoutedEventArgs e)
-        {
-            List<DiffLevel> lstSelectedDiffs = new List<DiffLevel>();
-           // lstSelectedDiffs = (List<DiffLevel>)cmbDiffLvl.SelectedItems;
-            foreach (DiffLevel diff in cmbDiffLvl.SelectedItems)
-            {
-                lstSelectedDiffs.Add(diff);
-            }
 
 
 
-            List<string> lstSelectedLetters = new List<string>();
-           // lstSelectedLetters = (List<string>)cmbLetters.SelectedItems;
-            foreach (string str in cmbLetters.SelectedItems)
-            {
-                lstSelectedLetters.Add(str);
-            }
+
+        #endregion
 
 
-        }
+
     }
 }
