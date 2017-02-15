@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WordGenerator"
         mc:Ignorable="d"
-        Title="שאלון" Height="300" Width="300" FontSize="18"  Background="#FFE4E4E4" Loaded="Window_Loaded">
+        Title="שאלון" Height="300" Width="300" FontSize="18"  Background="#FFE4E4E4" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid >
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
             <Label Name="lblWord" Content="{Binding Word}"/>

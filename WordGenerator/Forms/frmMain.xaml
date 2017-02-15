@@ -8,7 +8,11 @@
         Title="מילים לפסיכומטרי" Height="350" Background="#FFE4E4E4" Width="525">
     <Grid FlowDirection="RightToLeft">
         <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Label Name="lblTitle" HorizontalAlignment="Center" VerticalAlignment="Top" MaxHeight="30" Content=" הכנה לפסיכומטרי מילים"></Label>
+            <StackPanel Orientation="Horizontal">
+                <Button Name="btnAddWords" Content="הכנס מילים" Background="AliceBlue" Click="btnAddWords_Click"></Button>
+                <Label Name="lblTitle" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="129,0,0,0" MaxHeight="30" Content=" הכנה לפסיכומטרי מילים"></Label>
+               
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
 
                 <StackPanel HorizontalAlignment="Left" Margin="35" VerticalAlignment="Stretch">

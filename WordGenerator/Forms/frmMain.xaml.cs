@@ -112,7 +112,7 @@ namespace WordGenerator
             }
            // lstWords = SuffleList(lstWords);
 
-            frmQuiz quiz = new frmQuiz(lstWords);
+            frmQuiz quiz = new frmQuiz(lstWords,this);
             Hide();
             quiz.Show();
 
@@ -132,9 +132,15 @@ namespace WordGenerator
 
 
 
+
+
         #endregion
 
-
-
+        private void btnAddWords_Click(object sender, RoutedEventArgs e)
+        {
+            frmAddWords frmadd = new frmAddWords(this);
+               Hide();
+                frmadd.Show();
+        }
     }
 }

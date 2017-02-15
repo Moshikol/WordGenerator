@@ -25,10 +25,12 @@ namespace WordGenerator
         List<Word> lstWords = new List<Word>();
         Word CurrentWord;
         int index = 0;
+        frmMain frmMainGlob;
 
-        public frmQuiz(List<Word> lstwords)
+        public frmQuiz(List<Word> lstwords ,frmMain frmmain)
         {
-            lstWords = lstwords;
+            frmMainGlob = frmmain;
+               lstWords = lstwords;
             InitializeComponent();
             DataContext = lstWords;
         }
@@ -136,5 +138,9 @@ namespace WordGenerator
             }
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            frmMainGlob.Show();
+        }
     }
 }

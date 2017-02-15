@@ -11,11 +11,12 @@ namespace WordGenerator
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class frmAddWords : Window
     {
-      
-        public MainWindow()
+        frmMain frmMainGlob; 
+        public frmAddWords(frmMain main)
         {
+            frmMainGlob = main;
             InitializeComponent();
         }
         DiffLevel diffGlob = new DiffLevel(-6, "");
@@ -75,6 +76,11 @@ namespace WordGenerator
         private void txtWord_GotFocus(object sender, RoutedEventArgs e)
         {
             InputLanguageManager.Current.CurrentInputLanguage = new CultureInfo("en");
+        }
+
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            frmMainGlob.Show();
         }
     }
 }
