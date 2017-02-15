@@ -19,9 +19,12 @@ namespace WordGenerator
     /// </summary>
     public partial class frmQuiz : Window
     {
-        public frmQuiz()
+        List<Word> lstWords = new List<Word>();
+
+        public frmQuiz(List<Word> lstwords)
         {
             InitializeComponent();
         }
+        
     }
 }

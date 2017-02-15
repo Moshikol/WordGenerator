@@ -27,7 +27,7 @@ namespace WordGenerator
         {
             InitializeComponent();
             CmbFill();
-           
+
         }
 
         private void btnSaveAndStart_Click(object sender, RoutedEventArgs e)
@@ -98,7 +98,7 @@ namespace WordGenerator
                 foreach (string lettedr in lstSelectedLetters)
                 {
 
-                     DataTable dtWords = dawords.GetWordsByDiffAndLetter(lettedr, diffLvl.ID);
+                    DataTable dtWords = dawords.GetWordsByDiffAndLetter(lettedr, diffLvl.ID);
                     foreach (DataRow dr in dtWords.Rows)
                     {
                         int temp;
@@ -109,10 +109,20 @@ namespace WordGenerator
                 }
 
             }
+            lstWords = SuffleList(lstWords);
         }
 
-
-
+        public List<Word> SuffleList(List<Word> lstW)
+        {
+            Random rnd = new Random();
+          //  List tempwORD = lstW.OrderBy(item => rnd.Next());
+            
+            foreach (Word w in lstW.OrderBy(item => rnd.Next()))
+            {
+                lstW.Add(w);
+            }
+            return lstW;
+        }
 
 
         #endregion
