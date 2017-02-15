@@ -27,10 +27,10 @@ namespace WordGenerator
         int index = 0;
         frmMain frmMainGlob;
 
-        public frmQuiz(List<Word> lstwords ,frmMain frmmain)
+        public frmQuiz(List<Word> lstwords, frmMain frmmain)
         {
             frmMainGlob = frmmain;
-               lstWords = lstwords;
+            lstWords = lstwords;
             InitializeComponent();
             DataContext = lstWords;
         }
@@ -75,16 +75,16 @@ namespace WordGenerator
                 if (IsRight(CurrentWord.ID))
                 {// the meaning is Right  and we want to remove it from the list so we wont go over it again
                     txtMeaning.Background = Brushes.LightGreen;
-                   
-                   // txtMeaning.BorderThickness = new Thickness(3);
+
+
                     RemoveWord();
                 }
                 else
                 {// the meaning is worng and we want to add the Current word again To The list
                     txtMeaning.Background = Brushes.PaleVioletRed;
-                    Thread.Sleep(300);
-                  // txtMeaning.BorderThickness = new Thickness(3);
-                    AddWordAgain();
+                    btnContinue.Visibility = Visibility.Visible;
+
+
                 }
             }
 
@@ -96,11 +96,11 @@ namespace WordGenerator
             {
                 if (index < lstWords.Count)
                 {
-                   
+
                     index++;
                     CurrentWord = lstWords[index];
                     lblWord.Content = CurrentWord.theWord;
-                  // txtMeaning.Background = Brushes.White;
+                    // txtMeaning.Background = Brushes.White;
                 }
                 else if ((index >= lstWords.Count) && (lstWords.Count > 0))
                 {
@@ -141,6 +141,19 @@ namespace WordGenerator
         private void Window_Closed(object sender, EventArgs e)
         {
             frmMainGlob.Show();
+        }
+
+        private void btnContinue_Click(object sender, RoutedEventArgs e)
+        {
+            bool? ischecked = cbAddAgain.IsChecked;
+            if (ischecked == true)
+            {//if checked we want the word to come again
+                AddWordAgain();
+            }
+            else
+            {// if not checked it means we dont want the word to Come again
+                RemoveWord();
+            }
         }
     }
 }
