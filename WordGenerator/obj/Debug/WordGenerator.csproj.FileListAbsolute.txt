@@ -26,4 +26,3 @@ D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.Pro
 D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.csproj.GenerateResource.Cache
 D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.exe
 D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.pdb
-D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.csprojResolveAssemblyReference.cache

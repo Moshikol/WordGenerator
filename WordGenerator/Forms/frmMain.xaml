@@ -16,7 +16,7 @@
             <StackPanel Orientation="Horizontal">
 
                 <StackPanel HorizontalAlignment="Left" Margin="35" VerticalAlignment="Stretch">
-                    <ListBox MinWidth="150" SelectionMode="Multiple" Name="cmbLetters"/>
+                    <ListBox MinWidth="150" SelectionMode="Multiple" Name="cmbLetters" SelectionChanged="cmbLetters_SelectionChanged"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Margin="35" VerticalAlignment="Stretch">
                     <ListBox MinWidth="150" DisplayMemberPath="Difflevel" SelectedValuePath="ID"  SelectionMode="Multiple" Name="cmbDiffLvl"/>

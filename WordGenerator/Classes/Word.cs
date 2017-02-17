@@ -14,6 +14,7 @@ namespace WordGenerator
       
         public string Meaning { get; set; }
         public char StartingLetter { get; set; }
+        public int ErrorCount { get; set; }
 
         public Word( int id ,string TheWord , DiffLevel diff , string meaning)
         {

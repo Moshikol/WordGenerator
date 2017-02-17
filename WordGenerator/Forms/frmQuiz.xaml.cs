@@ -23,6 +23,7 @@ namespace WordGenerator
     public partial class frmQuiz : Window
     {
         List<Word> lstWords = new List<Word>();
+        List<Word> lstWorngWords = new List<Word>();
         Word CurrentWord;
         int index = 0;
         frmMain frmMainGlob;
@@ -44,11 +45,64 @@ namespace WordGenerator
             }
 
         }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            frmMainGlob.Show();
+        }
+
 
         private void txtMeaning_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
+
+
+
+
+        private void txtMeaning_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (IsRight(CurrentWord.ID))
+                {// the meaning is Right  and we want to remove it from the list so we wont go over it again
+                    txtMeaning.Background = Brushes.LightGreen;
+                    RemoveWord();
+                }
+                else
+                {// the meaning is worng and we want to add the Current word again To The list
+
+                    SetErrorControls();
+                    if (!(IsExistsonLst(CurrentWord.ID, lstWorngWords)))
+                    {// IF the word dont exsits on the worng words list 
+                        lstWorngWords.Add(CurrentWord);
+                        CurrentWord.ErrorCount++;
+                    }
+                    else
+                    {// IF the word do exsits on the worng words list 
+                        CurrentWord.ErrorCount++;
+
+                    }
+                }
+            }
+
+
+        }
+
+
+        private void btnContinue_Click(object sender, RoutedEventArgs e)
+        {
+            bool? ischecked = cbAddAgain.IsChecked;
+            if (ischecked == true)
+            {//if checked we want the word to come again
+                AddWordAgain();
+            }
+            else
+            {// if not checked it means we dont want the word to Come again
+                RemoveWord();
+            }
+        }
+
+
 
         public bool IsRight(int WordID)
         {
@@ -65,50 +119,51 @@ namespace WordGenerator
 
         }
 
-
-
-
-        private void txtMeaning_KeyDown(object sender, KeyEventArgs e)
+        public void NextWord()
         {
-            if (e.Key == Key.Enter)
+            if (lstWords.Count > 0)
             {
-                if (IsRight(CurrentWord.ID))
-                {// the meaning is Right  and we want to remove it from the list so we wont go over it again
-                    txtMeaning.Background = Brushes.LightGreen;
 
+                UnSetErrorControls();
 
-                    RemoveWord();
+                if (lstWords != null)
+                {
+                    if (index <= lstWords.Count - 1)
+                    {
+
+                        index++;
+                        CurrentWord = lstWords[index - 1];
+                        lblWord.Content = CurrentWord.theWord;
+                        txtMeaning.Background = Brushes.White;
+                        txtMeaning.Text = "";
+                    }
+                    else if ((index >= lstWords.Count - 1) && (lstWords.Count > 0))
+                    {
+                        index = 0;
+                        //NextWord();
+                    }
                 }
-                else
-                {// the meaning is worng and we want to add the Current word again To The list
-                    txtMeaning.Background = Brushes.PaleVioletRed;
-                    btnContinue.Visibility = Visibility.Visible;
-
-
-                }
+            }
+            else
+            {//the Session ended all the words was done 
+                ShowEndOfSessionControls();
             }
 
 
         }
-        public void NextWord()
-        {
-            if (lstWords != null)
-            {
-                if (index < lstWords.Count)
-                {
 
-                    index++;
-                    CurrentWord = lstWords[index];
-                    lblWord.Content = CurrentWord.theWord;
-                    // txtMeaning.Background = Brushes.White;
-                }
-                else if ((index >= lstWords.Count) && (lstWords.Count > 0))
+        private void ShowEndOfSessionControls()
+        {
+            string strWrongWords="";
+            foreach (Word w in lstWords)
+            {
+                if (w.ErrorCount>0)
                 {
-                    index = 0;
+                    strWrongWords += Environment.NewLine + " המילה: " + w.theWord + Environment.NewLine + "הפירוש: " + w.Meaning +Environment.NewLine+"מספר הטעיות במילה: " + w.ErrorCount.ToString() ;
                 }
             }
-
-
+            lblScore.Content = strWrongWords;
+            UnSetErrorControls();
         }
 
 
@@ -138,22 +193,37 @@ namespace WordGenerator
             }
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        public void SetErrorControls()
         {
-            frmMainGlob.Show();
+            lblMeaning.Content = "הפירוש:" + CurrentWord.Meaning;
+            txtMeaning.Background = Brushes.PaleVioletRed;
+            btnContinue.Visibility = Visibility.Visible;
+            lblMeaning.Visibility = Visibility.Visible;
+            cbAddAgain.Visibility = Visibility.Visible;
+        }
+        public void UnSetErrorControls()
+        {
+            lblMeaning.Content = "";
+            txtMeaning.Background = Brushes.White;
+            btnContinue.Visibility = Visibility.Collapsed;
+            lblMeaning.Visibility = Visibility.Collapsed;
+            cbAddAgain.Visibility = Visibility.Collapsed;
         }
 
-        private void btnContinue_Click(object sender, RoutedEventArgs e)
+        public bool IsExistsonLst(int WordID, List<Word> lstWordsToCheck)
         {
-            bool? ischecked = cbAddAgain.IsChecked;
-            if (ischecked == true)
-            {//if checked we want the word to come again
-                AddWordAgain();
+            bool res = false;
+            foreach (Word w in lstWordsToCheck)
+            {
+                if (w.ID == WordID)
+                {// THE WORD EXSISTS ON THE LIST
+                    res = true;
+                }
+
             }
-            else
-            {// if not checked it means we dont want the word to Come again
-                RemoveWord();
-            }
+
+            return res;
+
         }
     }
 }

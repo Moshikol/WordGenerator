@@ -33,23 +33,31 @@ namespace WordGenerator
 
         private void btnSaveAndStart_Click(object sender, RoutedEventArgs e)
         {
-            List<DiffLevel> lstSelectedDiffs = new List<DiffLevel>();
-            // lstSelectedDiffs = (List<DiffLevel>)cmbDiffLvl.SelectedItems;
-            foreach (DiffLevel diff in cmbDiffLvl.SelectedItems)
+            if ((cmbLetters.SelectedItems.Count>0)&&(cmbDiffLvl.SelectedItems.Count>0))
             {
-                lstSelectedDiffs.Add(diff);
+
+                List<DiffLevel> lstSelectedDiffs = new List<DiffLevel>();
+                // lstSelectedDiffs = (List<DiffLevel>)cmbDiffLvl.SelectedItems;
+                foreach (DiffLevel diff in cmbDiffLvl.SelectedItems)
+                {
+                    lstSelectedDiffs.Add(diff);
+                }
+
+
+
+                List<string> lstSelectedLetters = new List<string>();
+                // lstSelectedLetters = (List<string>)cmbLetters.SelectedItems;
+                foreach (string str in cmbLetters.SelectedItems)
+                {
+                    lstSelectedLetters.Add(str);
+                }
+
+                GetWordsFromDb(lstSelectedLetters, lstSelectedDiffs); 
             }
-
-
-
-            List<string> lstSelectedLetters = new List<string>();
-            // lstSelectedLetters = (List<string>)cmbLetters.SelectedItems;
-            foreach (string str in cmbLetters.SelectedItems)
+            else
             {
-                lstSelectedLetters.Add(str);
+                MessageBox.Show("אנא בחר לפחות אות אחת ולפחות רמת קושי אחת");
             }
-
-            GetWordsFromDb(lstSelectedLetters, lstSelectedDiffs);
         }
 
 
@@ -141,6 +149,14 @@ namespace WordGenerator
             frmAddWords frmadd = new frmAddWords(this);
                Hide();
                 frmadd.Show();
+        }
+
+        private void cmbLetters_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbLetters.SelectedIndex == 0)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

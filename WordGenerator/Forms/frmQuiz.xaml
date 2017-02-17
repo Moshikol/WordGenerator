@@ -132,9 +132,13 @@
 
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox Name="txtMeaning" FlowDirection="RightToLeft" InputLanguageManager.InputLanguage="he-IL"  MinWidth="150" TextChanged="txtMeaning_TextChanged" KeyDown="txtMeaning_KeyDown" />
-            <Button Name="btnContinue" Content="המשך" Click="btnContinue_Click" Visibility="Hidden"></Button>
-            <CheckBox Name="cbAddAgain" IsChecked="True" Style="{StaticResource CheckBoxStyle}" FlowDirection="RightToLeft" Content="האם להציג שוב?" />
+            <TextBox Name="txtMeaning" FlowDirection="RightToLeft" InputLanguageManager.InputLanguage="he-IL"  MinWidth="150" TextChanged="txtMeaning_TextChanged" KeyDown="txtMeaning_KeyDown"  />
+            <Label FlowDirection="RightToLeft" Name="lblMeaning" Content=""  Visibility="Collapsed"/>
+
+            <Button Name="btnContinue" Content="המשך" Click="btnContinue_Click" Visibility="Collapsed"></Button>
+            <CheckBox Name="cbAddAgain" IsChecked="True" Style="{StaticResource CheckBoxStyle}" FlowDirection="RightToLeft" Visibility="Collapsed" Content="האם להציג שוב?" />
+            <Label Name="lblScore"/>
+            <Button Name="btnRepeat" ToolTip="חזור על אותו הבוחן עם אותם המילים מההתחלה"/>
         </StackPanel>
     </Grid>
 </Window>
