@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WordGenerator.DataSets.WordsTableAdapters;
 
 namespace WordGenerator
 {
@@ -24,6 +26,28 @@ namespace WordGenerator
             Meaning = meaning;
             StartingLetter = TheWord[0];
 
+        }
+
+        public static List<Word> GetLstFromDb()
+        {
+            List<Word> Reslst = new List<Word>();
+
+            DAWords daWords = new DAWords();
+
+            DataTable dt;
+            dt = daWords.GetWordsData();
+            foreach (DataRow dr in dt.Rows)
+            {
+                int tempid = 0;
+                int.TryParse(dr["id"].ToString(), out tempid);
+                DiffLevel df = DiffLevel.GetDifflvlByID(dr["diffID"].ToString());
+                Reslst.Add(new Word(tempid, dr["word"].ToString(), df, dr["meaning"].ToString()));
+
+            }
+
+
+
+            return Reslst;
         }
     }
 }

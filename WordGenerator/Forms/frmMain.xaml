@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WordGenerator"
         mc:Ignorable="d"
-        Title="מילים לפסיכומטרי" Height="350" Background="#FFE4E4E4" Width="525">
+        Title="מילים לפסיכומטרי" Height="500" Background="#FFE4E4E4" Width="525">
     <Grid FlowDirection="RightToLeft">
         <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel Orientation="Horizontal">

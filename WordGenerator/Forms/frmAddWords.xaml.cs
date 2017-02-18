@@ -5,6 +5,7 @@ using System.Windows.Input;
 using WordGenerator.DataSets.WordsTableAdapters;
 using System.Data;
 using System.Globalization;
+using System;
 
 namespace WordGenerator
 {
@@ -13,7 +14,8 @@ namespace WordGenerator
     /// </summary>
     public partial class frmAddWords : Window
     {
-        frmMain frmMainGlob; 
+        frmMain frmMainGlob;
+        Word GlobSelectedWord;
         public frmAddWords(frmMain main)
         {
             frmMainGlob = main;
@@ -23,16 +25,17 @@ namespace WordGenerator
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             FillCmbData();
-           
+            cmbDiff.ItemsSource = DiffLevel.GetLstFromDb();
+            cmbDiff.SelectedIndex = 0;
         }
 
         public void FillCmbData()
         {
-            cmbDiff.ItemsSource =  DiffLevel.GetLstFromDb();
-            cmbDiff.SelectedIndex = 0;
+
+            cmbwords.ItemsSource = Word.GetLstFromDb();
         }
-        
-      
+
+
 
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -44,7 +47,9 @@ namespace WordGenerator
                 txtMeaning.Clear();
                 txtWord.Clear();
                 txtWord.Focus();
-                cmbDiff.SelectedIndex = 0;
+                //  cmbDiff.SelectedIndex = 0;
+                FillCmbData();
+
             }
             else
                 MessageBox.Show("אחד מהנתונים לא תקין אנא בדוק");
@@ -81,6 +86,63 @@ namespace WordGenerator
         private void Window_Closed(object sender, System.EventArgs e)
         {
             frmMainGlob.Show();
+        }
+
+        private void cmbwords_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SaveWord();
+            }
+        }
+
+        private void SaveMeaning()
+        {
+            if (GlobSelectedWord != null)
+            {
+                DAWords dawords = new DAWords();
+                dawords.UpdateMeaningOnly(txtMeaningUpdate.Text, (GlobSelectedWord.ID));
+                FillCmbData();
+                txtMeaningUpdate.Text = "";
+            }
+        }
+
+        private void SaveWord()
+        {
+            if (GlobSelectedWord != null)
+            {
+                DAWords dawords = new DAWords();
+                dawords.UpdateTheWordOnly(cmbwords.Text, (GlobSelectedWord.ID));
+                FillCmbData();
+            }
+        }
+
+        private void btnSaveWord_Click(object sender, RoutedEventArgs e)
+        {
+            SaveMeaning();
+
+        }
+
+        private void cmbwords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (cmbwords.SelectedItem != null)
+            {
+                GlobSelectedWord = ((Word)cmbwords.SelectedItem);
+                txtMeaningUpdate.Text = ((Word)cmbwords.SelectedItem).Meaning;
+            }
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            DAWords dawords = new DAWords();
+            if (GlobSelectedWord != null)
+            {
+
+                dawords.DeleteWordbyid(GlobSelectedWord.ID);
+                FillCmbData();
+            }
         }
     }
 }

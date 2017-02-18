@@ -155,7 +155,7 @@ namespace WordGenerator
         {
             if (cmbLetters.SelectedIndex == 0)
             {
-                e.Handled = true;
+                e.Handled = false;
             }
         }
     }

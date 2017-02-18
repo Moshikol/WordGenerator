@@ -19,10 +19,24 @@
             <StackPanel Margin="5" HorizontalAlignment="Stretch" Orientation="Horizontal">
                 <Label Name="lblDiff" Content="בחר רמת קושי"/>
                 <ComboBox DisplayMemberPath="Difflevel" SelectedValuePath="ID" HorizontalAlignment="Stretch" MinWidth="150" Name="cmbDiff" PreviewTextInput="txtMeaning_PreviewTextInput" SelectionChanged="cmbDiff_SelectionChanged">
-                    
+
                 </ComboBox>
             </StackPanel>
             <Button Name='btnSave' Content='שמור' MaxWidth="150" MinHeight="35" Background="#FFB3FFAE" Click="btnSave_Click"/>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <ComboBox IsEditable="True" Margin="5" DisplayMemberPath="theWord" SelectedValuePath="ID" HorizontalAlignment="Center" MinWidth="150" Name="cmbwords"  SelectionChanged="cmbwords_SelectionChanged"  KeyUp="cmbwords_KeyUp"/>
+                <Button Name="btnDelete" Click="btnDelete_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <Image Name="imgDelete" MaxHeight="35" Source="D:\VisualStudio\Projects\WordGenerator\WordGenerator\Images\Delete.png" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <TextBox Name="txtMeaningUpdate" Margin="10" HorizontalAlignment="Center" MinWidth="150"/>
+            <Button Name='btnSaveWord' Content='שמור פירוש' MaxWidth="150" MinHeight="35" Background="#FFB3FFAE" Click="btnSaveWord_Click"/>
         </StackPanel>
 
     </Grid>

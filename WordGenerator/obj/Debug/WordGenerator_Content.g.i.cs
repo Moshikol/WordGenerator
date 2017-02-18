@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlitewords.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sqlitewords.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/delete.png")]
 
 
