@@ -163,5 +163,10 @@ namespace WordGenerator
                 e.Handled = false;
             }
         }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            CmbFill();
+        }
     }
 }

@@ -27,3 +27,7 @@ D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.csp
 D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.exe
 D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.pdb
 D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.csprojResolveAssemblyReference.cache
+D:\VisualStudio\Projects\WordGenerator\WordGenerator\bin\Debug\WordGenerator.exe.manifest
+D:\VisualStudio\Projects\WordGenerator\WordGenerator\bin\Debug\WordGenerator.application
+D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.exe.manifest
+D:\VisualStudio\Projects\WordGenerator\WordGenerator\obj\Debug\WordGenerator.application

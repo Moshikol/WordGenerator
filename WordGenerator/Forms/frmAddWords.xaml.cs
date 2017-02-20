@@ -66,7 +66,7 @@ namespace WordGenerator
             {
                 e.Handled = Globals.isValidHebText(e.Text);
             }
-            else e.Handled = false;
+            else e.Handled = true;
         }
 
         private void cmbDiff_SelectionChanged(object sender, SelectionChangedEventArgs e)
