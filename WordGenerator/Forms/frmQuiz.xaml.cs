@@ -24,24 +24,29 @@ namespace WordGenerator
     {
         List<Word> lstWords = new List<Word>();
         List<Word> lstWorngWords = new List<Word>();
+        List<Word> lstWordRepeat = new List<Word>();
         Word CurrentWord;
-        int index = 0;
+        int index = 0, AllCount = 0;
         frmMain frmMainGlob;
 
         public frmQuiz(List<Word> lstwords, frmMain frmmain)
         {
             frmMainGlob = frmmain;
             lstWords = lstwords;
+            lstWordRepeat = lstwords;
             InitializeComponent();
             DataContext = lstWords;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+           
             if (index < lstWords.Count)
             {
-                CurrentWord = lstWords[index];
+                AllCount = lstWords.Count;
+                   CurrentWord = lstWords[index];
                 lblWord.Content = CurrentWord.theWord;
+                setCountLblVal();
             }
 
         }
@@ -49,14 +54,6 @@ namespace WordGenerator
         {
             frmMainGlob.Show();
         }
-
-
-        private void txtMeaning_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-
 
 
         private void txtMeaning_KeyDown(object sender, KeyEventArgs e)
@@ -102,7 +99,10 @@ namespace WordGenerator
             }
         }
 
-
+        public void setCountLblVal()
+        {
+            lblWordsCount.Content = index + "\\ " + lstWords.Count;
+        }
 
         public bool IsRight(int WordID)
         {
@@ -136,10 +136,12 @@ namespace WordGenerator
                         lblWord.Content = CurrentWord.theWord;
                         txtMeaning.Background = Brushes.White;
                         txtMeaning.Text = "";
+                        setCountLblVal();
                     }
                     else if ((index >= lstWords.Count - 1) && (lstWords.Count > 0))
                     {
                         index = 0;
+                        setCountLblVal();
                         //NextWord();
                     }
                 }
@@ -155,24 +157,42 @@ namespace WordGenerator
         private void ShowEndOfSessionControls()
         {
             string strWrongWords="";
-            foreach (Word w in lstWords)
+            foreach (Word w in lstWorngWords)
             {
                 if (w.ErrorCount>0)
                 {
-                    strWrongWords += Environment.NewLine + " המילה: " + w.theWord + Environment.NewLine + "הפירוש: " + w.Meaning +Environment.NewLine+"מספר הטעיות במילה: " + w.ErrorCount.ToString() ;
+                    strWrongWords += Environment.NewLine + " המילה: " + w.theWord + Environment.NewLine + "הפירוש: " + w.Meaning +Environment.NewLine+"מספר הטעויות במילה: " + w.ErrorCount.ToString() ;
                 }
             }
+
+            lblWordsCount.Visibility = Visibility.Collapsed;
+            lblWord.Visibility = Visibility.Collapsed;
+            txtMeaning.Visibility = Visibility.Collapsed;
             lblScore.Content = strWrongWords;
+            lblScore.Visibility = Visibility.Visible;
+            btnRepeat.Visibility = Visibility.Visible;
             UnSetErrorControls();
+            SizeToContent = SizeToContent.Height;
+
+
         }
 
-
+        public void UnsetScore()
+        {
+            lblScore.Content = "";
+            lblScore.Visibility = Visibility.Collapsed;
+            btnRepeat.Visibility = Visibility.Collapsed;
+            SizeToContent = SizeToContent.Manual;
+            UnSetErrorControls();
+            
+        }
         public void AddWordAgain()
         {
             if (lstWords != null)
             {
                 if (CurrentWord != null)
                 {
+                    lstWords.Remove(CurrentWord);
                     lstWords.Add(CurrentWord);
                     NextWord();
                 }
@@ -224,6 +244,26 @@ namespace WordGenerator
 
             return res;
 
+        }
+
+        private void btnRepeat_Click(object sender, RoutedEventArgs e)
+        {
+            lstWords = lstWordRepeat;
+            index = 0;
+            lblWordsCount.Visibility = Visibility.Visible;
+            lblWord.Visibility = Visibility.Visible;
+            txtMeaning.Visibility = Visibility.Visible;
+            this.Height = 300;
+            AllCount = lstWords.Count;
+
+            if (lstWords.Count>0)
+            {
+                CurrentWord = lstWords[index];
+                lblWord.Content = CurrentWord.theWord;
+                UnsetScore();
+
+            }
+          
         }
     }
 }

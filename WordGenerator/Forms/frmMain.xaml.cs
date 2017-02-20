@@ -118,11 +118,16 @@ namespace WordGenerator
                 }
 
             }
-           // lstWords = SuffleList(lstWords);
+            // lstWords = SuffleList(lstWords);
 
-            frmQuiz quiz = new frmQuiz(lstWords,this);
-            Hide();
-            quiz.Show();
+            if (lstWords.Count > 0)
+            {
+                frmQuiz quiz = new frmQuiz(lstWords, this);
+                Hide();
+                quiz.Show();
+            }
+            else
+                MessageBox.Show("אין מילים תחת הנתונים המבוקשים");
 
         }
 

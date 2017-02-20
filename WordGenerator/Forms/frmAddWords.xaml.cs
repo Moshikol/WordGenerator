@@ -6,6 +6,7 @@ using WordGenerator.DataSets.WordsTableAdapters;
 using System.Data;
 using System.Globalization;
 using System;
+using System.Linq;
 
 namespace WordGenerator
 {
@@ -29,12 +30,7 @@ namespace WordGenerator
             cmbDiff.SelectedIndex = 0;
         }
 
-        public void FillCmbData()
-        {
-
-            cmbwords.ItemsSource = Word.GetLstFromDb();
-        }
-
+      
 
 
 
@@ -96,26 +92,7 @@ namespace WordGenerator
             }
         }
 
-        private void SaveMeaning()
-        {
-            if (GlobSelectedWord != null)
-            {
-                DAWords dawords = new DAWords();
-                dawords.UpdateMeaningOnly(txtMeaningUpdate.Text, (GlobSelectedWord.ID));
-                FillCmbData();
-                txtMeaningUpdate.Text = "";
-            }
-        }
-
-        private void SaveWord()
-        {
-            if (GlobSelectedWord != null)
-            {
-                DAWords dawords = new DAWords();
-                dawords.UpdateTheWordOnly(cmbwords.Text, (GlobSelectedWord.ID));
-                FillCmbData();
-            }
-        }
+        
 
         private void btnSaveWord_Click(object sender, RoutedEventArgs e)
         {
@@ -139,8 +116,36 @@ namespace WordGenerator
             DAWords dawords = new DAWords();
             if (GlobSelectedWord != null)
             {
-
+                txtMeaningUpdate.Text = "";
                 dawords.DeleteWordbyid(GlobSelectedWord.ID);
+                FillCmbData();
+            }
+        }
+
+
+        public void FillCmbData()
+        {
+
+            cmbwords.ItemsSource = Word.GetLstFromDb();
+        }
+
+        private void SaveMeaning()
+        {
+            if (GlobSelectedWord != null)
+            {
+                DAWords dawords = new DAWords();
+                dawords.UpdateMeaningOnly(txtMeaningUpdate.Text, (GlobSelectedWord.ID));
+                FillCmbData();
+                txtMeaningUpdate.Text = "";
+            }
+        }
+
+        private void SaveWord()
+        {
+            if (GlobSelectedWord != null)
+            {
+                DAWords dawords = new DAWords();
+                dawords.UpdateTheWordOnly(cmbwords.Text, (GlobSelectedWord.ID));
                 FillCmbData();
             }
         }
