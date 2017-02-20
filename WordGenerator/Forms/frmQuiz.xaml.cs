@@ -157,12 +157,21 @@ namespace WordGenerator
         private void ShowEndOfSessionControls()
         {
             string strWrongWords="";
-            foreach (Word w in lstWorngWords)
+            if (lstWorngWords.Count>0)
             {
-                if (w.ErrorCount>0)
+                strWrongWords = " מספר טעויות כללי :" + lstWorngWords.Count;
+                foreach (Word w in lstWorngWords)
                 {
-                    strWrongWords += Environment.NewLine + " המילה: " + w.theWord + Environment.NewLine + "הפירוש: " + w.Meaning +Environment.NewLine+"מספר הטעויות במילה: " + w.ErrorCount.ToString() ;
-                }
+                    if (w.ErrorCount > 0)
+                    {
+                        strWrongWords += Environment.NewLine + " המילה: " + w.theWord + Environment.NewLine + "הפירוש: " + w.Meaning + Environment.NewLine + "מספר הטעויות במילה: " + w.ErrorCount.ToString();
+                    }
+                } 
+            }
+            else
+            {
+                strWrongWords = "";
+                strWrongWords = "כל הכבוד מלכת עולם !! עשית הכל בלי טעויות";
             }
 
             lblWordsCount.Visibility = Visibility.Collapsed;
@@ -172,7 +181,7 @@ namespace WordGenerator
             lblScore.Visibility = Visibility.Visible;
             btnRepeat.Visibility = Visibility.Visible;
             UnSetErrorControls();
-            SizeToContent = SizeToContent.Height;
+           // SizeToContent = SizeToContent.Height;
 
 
         }
@@ -182,7 +191,7 @@ namespace WordGenerator
             lblScore.Content = "";
             lblScore.Visibility = Visibility.Collapsed;
             btnRepeat.Visibility = Visibility.Collapsed;
-            SizeToContent = SizeToContent.Manual;
+         //   SizeToContent = SizeToContent.Manual;
             UnSetErrorControls();
             
         }
@@ -253,6 +262,8 @@ namespace WordGenerator
             lblWordsCount.Visibility = Visibility.Visible;
             lblWord.Visibility = Visibility.Visible;
             txtMeaning.Visibility = Visibility.Visible;
+            txtMeaning.Text = "";
+            lblScore.Content = "";
             this.Height = 300;
             AllCount = lstWords.Count;
 
