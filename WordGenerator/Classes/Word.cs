@@ -30,24 +30,33 @@ namespace WordGenerator
 
         public static List<Word> GetLstFromDb()
         {
-            List<Word> Reslst = new List<Word>();
-
-            DAWords daWords = new DAWords();
-
-            DataTable dt;
-            dt = daWords.GetWordsData();
-            foreach (DataRow dr in dt.Rows)
+            try
             {
-                int tempid = 0;
-                int.TryParse(dr["id"].ToString(), out tempid);
-                DiffLevel df = DiffLevel.GetDifflvlByID(dr["diffID"].ToString());
-                Reslst.Add(new Word(tempid, dr["word"].ToString(), df, dr["meaning"].ToString()));
+                List<Word> Reslst = new List<Word>();
 
+                DAWords daWords = new DAWords();
+
+                DataTable dt;
+                dt = daWords.GetWordsData();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int tempid = 0;
+                    int.TryParse(dr["id"].ToString(), out tempid);
+                    DiffLevel df = DiffLevel.GetDifflvlByID(dr["diffID"].ToString());
+                    Reslst.Add(new Word(tempid, dr["word"].ToString(), df, dr["meaning"].ToString()));
+
+                }
+                return Reslst;
+            }
+            catch (Exception ex)
+            {
+                Globals.GetExData("GetLstFromDb", "word", ex);
+                return null;
             }
 
 
 
-            return Reslst;
+           
         }
     }
 }

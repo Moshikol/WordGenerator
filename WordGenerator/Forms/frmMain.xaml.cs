@@ -68,33 +68,41 @@ namespace WordGenerator
 
         public void CmbFill()
         {
-            List<string> lstStr = new List<string>();
-            DAWords daWords = new DAWords();
-
-            DataTable dt = daWords.GetAllLettersLst();
-            lstStr.Add("בחר אותיות לבחינה");
-
-            foreach (DataRow dr in dt.Rows)
+            try
             {
 
-                lstStr.Add(dr["startingLet"].ToString());
+                List<string> lstStr = new List<string>();
+                DAWords daWords = new DAWords();
+
+                DataTable dt = daWords.GetAllLettersLst();
+                lstStr.Add("בחר אותיות לבחינה");
+
+                foreach (DataRow dr in dt.Rows)
+                {
+
+                    lstStr.Add(dr["startingLet"].ToString());
+                }
+
+                cmbLetters.ItemsSource = lstStr;
+                // cmbLetters.SelectedIndex = 0;
+                //*****************Difflvl**************************
+
+                List<string> lstDif = new List<string>();
+                DADiffLevel daDiff = new DADiffLevel();
+
+                DataTable dtdiff = daDiff.GetDiffLevelData();
+
+
+                cmbDiffLvl.ItemsSource = DiffLevel.GetLstFromDb();
+
+
+
+
             }
-
-            cmbLetters.ItemsSource = lstStr;
-            // cmbLetters.SelectedIndex = 0;
-            //*****************Difflvl**************************
-
-            List<string> lstDif = new List<string>();
-            DADiffLevel daDiff = new DADiffLevel();
-
-            DataTable dtdiff = daDiff.GetDiffLevelData();
-
-
-            cmbDiffLvl.ItemsSource = DiffLevel.GetLstFromDb();
-
-
-
-
+            catch (Exception ex)
+            {
+                Globals.GetExData("CmbFill", "Frmmain", ex);
+            }
         }
 
         private void GetWordsFromDb(List<string> lstSelectedLetters, List<DiffLevel> lstSelectedDiffs)

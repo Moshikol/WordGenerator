@@ -25,9 +25,20 @@ namespace WordGenerator
         DiffLevel diffGlob = new DiffLevel(-6, "");
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            FillCmbData();
-            cmbDiff.ItemsSource = DiffLevel.GetLstFromDb();
-            cmbDiff.SelectedIndex = 0;
+            try
+            {
+
+                FillCmbData();
+                cmbDiff.ItemsSource = DiffLevel.GetLstFromDb();
+                cmbDiff.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("תקראי למושיקו ותגידי לו שיש בעיה תצלמי לו את הטקסט הבא הוא יביו כי הוא גאון: תעשי אוקי ואז זה יופיע" );
+
+                Globals.GetExData("Window_Loaded", "frmaddwords", ex);
+            }
         }
 
       
@@ -144,9 +155,17 @@ namespace WordGenerator
         {
             if (GlobSelectedWord != null)
             {
-                DAWords dawords = new DAWords();
-                dawords.UpdateTheWordOnly(cmbwords.Text, (GlobSelectedWord.ID));
-                FillCmbData();
+                if (cmbwords.Text != "")
+                {
+                   
+                        DAWords dawords = new DAWords();
+                        dawords.UpdateTheWordOnly(cmbwords.Text, (GlobSelectedWord.ID));
+                        FillCmbData();
+                  
+                      
+                }
+                else
+                    MessageBox.Show("תחת !! אסור ללחוץ אנטר שהשורה ריקה !");
             }
         }
     }

@@ -138,24 +138,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WordGenerator.exe" size="73216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WordGenerator.exe" size="74240">
       <assemblyIdentity name="WordGenerator" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uLGc6N1CnMQfMg3viX+xAqnPAvS3oSRHTsNTHU2Ufo4=</dsig:DigestValue>
+        <dsig:DigestValue>l1ovWIzjRdzYsQYyxON5kMIUOxN5RC86nsLTYvLM5aU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="WordGenerator.exe.config" size="2592">
+  <file name="WordGenerator.exe.config" size="2575">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>jdDhRhMADvUNoNM81SOZAs8uScAr7ws+3FNN5u0N8cY=</dsig:DigestValue>
+      <dsig:DigestValue>Ezj/1xh9v9VAeQCgXG4qBuHrdA0wDrbsr4E0EeCqHeo=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

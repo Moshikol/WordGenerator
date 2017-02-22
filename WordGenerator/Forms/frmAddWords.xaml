@@ -29,7 +29,7 @@
                     <Button.Template>
                         <ControlTemplate>
                             <StackPanel>
-                                <Image Name="imgDelete" MaxHeight="35" Source="D:\VisualStudio\Projects\WordGenerator\WordGenerator\Images\Delete.png" />
+                                <Image Name="imgDelete" MaxHeight="35" Source="..\Images\Delete.png" />
                             </StackPanel>
                         </ControlTemplate>
                     </Button.Template>
